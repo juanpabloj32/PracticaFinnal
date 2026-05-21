@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.miempresa.proyectofinal"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.miempresa.proyectofinal"
         minSdk = 28
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -32,6 +32,10 @@ android {
 }
 
 dependencies {
+
+
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)
