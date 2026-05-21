@@ -6,6 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,19 +25,29 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         btnEntrar = findViewById(R.id.btnEntrar);
 
-        // ANIMACIÓN
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
         btnEntrar.startAnimation(animation);
 
-        // Código unificado: Al presionar el botón se pasa directamente a ProductosActivity
         btnEntrar.setOnClickListener(v -> {
 
-            Intent intent = new Intent(LoginActivity.this, ProductosActivity.class);
+            String user = usuario.getText().toString();
+            String pass = password.getText().toString();
 
-            startActivity(intent);
+            if(user.equals("admin") && pass.equals("1234")){
 
-            finish();
+                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(LoginActivity.this, ProductosActivity.class);
+
+                startActivity(intent);
+
+                finish();
+
+            } else {
+
+                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

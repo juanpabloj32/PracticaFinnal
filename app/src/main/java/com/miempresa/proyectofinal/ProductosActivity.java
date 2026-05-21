@@ -6,18 +6,24 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.miempresa.proyectofinal.DBHelper;
+import com.miempresa.proyectofinal.LoginActivity;
+import com.miempresa.proyectofinal.Producto;
+import com.miempresa.proyectofinal.ProductoAdapter;
 
 import java.util.ArrayList;
 
 public class ProductosActivity extends AppCompatActivity {
 
     ListView listView;
-    FloatingActionButton fab;
+    BottomNavigationView bottomNavigation;
 
     DBHelper dbHelper;
 
     ArrayList<Producto> listaProductos;
+
+    ProductoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +32,42 @@ public class ProductosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_productos);
 
         listView = findViewById(R.id.listView);
-        fab = findViewById(R.id.fab);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
 
         dbHelper = new DBHelper(this);
 
-        listaProductos = dbHelper.obtenerProductos();
+        cargarProductos();
 
-        // Reemplazo del ArrayAdapter por tu adaptador personalizado
-        ProductoAdapter adapter = new ProductoAdapter(this, listaProductos);
-        listView.setAdapter(adapter);
+        bottomNavigation.setOnItemSelectedListener(item -> {
 
-        fab.setOnClickListener(v -> {
-            startActivity(new Intent(this, AgregarProductoActivity.class));
+            if(item.getItemId() == R.id.nav_productos){
+
+                return true;
+            }
+
+            else if(item.getItemId() == R.id.nav_agregar){
+
+                startActivity(new Intent(this, com.miempresa.proyectofinal.AgregarProductoActivity.class));
+
+                return true;
+            }
+
+            else if(item.getItemId() == R.id.nav_logout){
+
+                Intent intent = new Intent(this, LoginActivity.class);
+
+                startActivity(intent);
+
+                finish();
+
+                return true;
+            }
+
+            return false;
         });
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
+
             Producto producto = listaProductos.get(position);
 
             Intent i = new Intent(this, DetalleProductoActivity.class);
@@ -52,5 +79,21 @@ public class ProductosActivity extends AppCompatActivity {
 
             startActivity(i);
         });
+    }
+
+    private void cargarProductos(){
+
+        listaProductos = dbHelper.obtenerProductos();
+
+        adapter = new ProductoAdapter(this, listaProductos);
+
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        cargarProductos();
     }
 }

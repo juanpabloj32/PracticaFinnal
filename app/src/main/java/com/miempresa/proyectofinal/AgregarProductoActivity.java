@@ -1,12 +1,13 @@
 package com.miempresa.proyectofinal;
 
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.miempresa.proyectofinal.DBHelper;
 
 public class AgregarProductoActivity extends AppCompatActivity {
 
@@ -32,13 +33,23 @@ public class AgregarProductoActivity extends AppCompatActivity {
 
             String nom = nombre.getText().toString();
             String des = descripcion.getText().toString();
-            double pre = Double.parseDouble(precio.getText().toString());
+            String preTexto = precio.getText().toString();
+
+            if(nom.isEmpty() || des.isEmpty() || preTexto.isEmpty()){
+
+                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+
+                return;
+            }
+
+            double pre = Double.parseDouble(preTexto);
 
             boolean insertado = dbHelper.insertarProducto(nom, des, pre);
 
             if(insertado){
 
                 Toast.makeText(this, "Producto agregado", Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });
