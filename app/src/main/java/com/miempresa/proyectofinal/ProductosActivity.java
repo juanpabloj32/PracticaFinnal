@@ -2,7 +2,6 @@ package com.miempresa.proyectofinal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,28 +32,15 @@ public class ProductosActivity extends AppCompatActivity {
 
         listaProductos = dbHelper.obtenerProductos();
 
-        ArrayList<String> nombres = new ArrayList<>();
-
-        for(Producto p : listaProductos){
-
-            nombres.add(p.getNombre() + " - $" + p.getPrecio());
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                nombres
-        );
-
+        // Reemplazo del ArrayAdapter por tu adaptador personalizado
+        ProductoAdapter adapter = new ProductoAdapter(this, listaProductos);
         listView.setAdapter(adapter);
 
         fab.setOnClickListener(v -> {
-
             startActivity(new Intent(this, AgregarProductoActivity.class));
         });
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-
             Producto producto = listaProductos.get(position);
 
             Intent i = new Intent(this, DetalleProductoActivity.class);
