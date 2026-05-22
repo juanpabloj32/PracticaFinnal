@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:background="#EEF2F7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Producto"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="25dp"
+            android:elevation="8dp"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/nombreEditar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Nombre"
+                android:padding="15dp"/>
+
+            <EditText
+                android:id="@+id/descripcionEditar"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:hint="Descripción"
+                android:padding="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <EditText
+                android:id="@+id/precioEditar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Precio"
+                android:inputType="numberDecimal"
+                android:padding="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <Button
+                android:id="@+id/actualizar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="ACTUALIZAR PRODUCTO"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#2563EB"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

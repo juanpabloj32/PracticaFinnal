@@ -29,71 +29,77 @@ public class ProductosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_productos);
 
-        listView = findViewById(R.id.listView);
-        bottomNavigation = findViewById(R.id.bottomNavigation);
+        try {
+            setContentView(R.layout.activity_productos);
 
-        dbHelper = new DBHelper(this);
+            // Mapeo de componentes desde el XML
+            listView = findViewById(R.id.listView);
+            bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        cargarProductos();
+            // Configuración inicial del menú de navegación
+            bottomNavigation.setSelectedItemId(R.id.nav_productos);
 
-        bottomNavigation.setOnItemSelectedListener(item -> {
+            dbHelper = new DBHelper(this);
 
-            if(item.getItemId() == R.id.nav_productos){
+            // Carga los productos inicialmente
+            cargarProductos();
 
-                return true;
-            }
+            // Listener para controlar las opciones de navegación inferior
+            bottomNavigation.setOnItemSelectedListener(item -> {
 
-            else if(item.getItemId() == R.id.nav_agregar){
+                if(item.getItemId() == R.id.nav_productos){
+                    return true;
+                }
 
-                startActivity(new Intent(this, com.miempresa.proyectofinal.AgregarProductoActivity.class));
+                else if(item.getItemId() == R.id.nav_agregar){
+                    startActivity(new Intent(this, AgregarProductoActivity.class));
+                    return true;
+                }
 
-                return true;
-            }
+                else if(item.getItemId() == R.id.nav_logout){
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
 
-            else if(item.getItemId() == R.id.nav_logout){
+                return false;
+            });
 
-                Intent intent = new Intent(this, LoginActivity.class);
+            // Listener para interactuar con cada fila de la lista de productos
+            listView.setOnItemClickListener((parent, view, position, id) -> {
 
-                startActivity(intent);
+                Producto producto = listaProductos.get(position);
 
-                finish();
+                Intent i = new Intent(this, DetalleProductoActivity.class);
 
-                return true;
-            }
+                i.putExtra("id", producto.getId());
+                i.putExtra("nombre", producto.getNombre());
+                i.putExtra("descripcion", producto.getDescripcion());
+                i.putExtra("precio", producto.getPrecio());
 
-            return false;
-        });
+                startActivity(i);
+            });
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-
-            Producto producto = listaProductos.get(position);
-
-            Intent i = new Intent(this, DetalleProductoActivity.class);
-
-            i.putExtra("id", producto.getId());
-            i.putExtra("nombre", producto.getNombre());
-            i.putExtra("descripcion", producto.getDescripcion());
-            i.putExtra("precio", producto.getPrecio());
-
-            startActivity(i);
-        });
+        } catch (Exception e){
+            // Muestra una alerta emergente en caso de que ocurra un error fatal en onCreate
+            android.widget.Toast.makeText(this,
+                    e.toString(),
+                    android.widget.Toast.LENGTH_LONG).show();
+        }
     }
 
     private void cargarProductos(){
-
         listaProductos = dbHelper.obtenerProductos();
-
         adapter = new ProductoAdapter(this, listaProductos);
-
         listView.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        // Refresca la lista automáticamente cuando regresas a esta pantalla
         cargarProductos();
     }
 }

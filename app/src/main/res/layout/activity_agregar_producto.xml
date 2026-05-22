@@ -1,36 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="#EEF2F7">
 
-    <EditText
-        android:id="@+id/nombre"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"/>
+        android:orientation="vertical"
+        android:padding="25dp">
 
-    <EditText
-        android:id="@+id/descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Descripción"/>
+        <!-- TITULO -->
 
-    <EditText
-        android:id="@+id/precio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Precio"
-        android:inputType="numberDecimal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar Producto"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:layout_marginTop="20dp"/>
 
-    <Button
-        android:id="@+id/guardar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registra un nuevo producto al sistema"
+            android:textSize="15sp"
+            android:textColor="#64748B"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"/>
 
-</LinearLayout>
+        <!-- CONTENEDOR -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="25dp"
+            android:elevation="8dp">
+
+            <!-- NOMBRE -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del producto"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/nombre"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Ejemplo: Laptop Gamer"
+                android:padding="15dp"
+                android:textColor="#000000"
+                android:textColorHint="#94A3B8"
+                android:backgroundTint="#2563EB"
+                android:layout_marginTop="8dp"/>
+
+            <!-- DESCRIPCION -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="14sp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:hint="Describe el producto"
+                android:gravity="top"
+                android:padding="15dp"
+                android:textColor="#000000"
+                android:textColorHint="#94A3B8"
+                android:backgroundTint="#2563EB"
+                android:layout_marginTop="8dp"/>
+
+            <!-- PRECIO -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="14sp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/precio"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Ejemplo: 15000"
+                android:inputType="numberDecimal"
+                android:padding="15dp"
+                android:textColor="#000000"
+                android:textColorHint="#94A3B8"
+                android:backgroundTint="#2563EB"
+                android:layout_marginTop="8dp"/>
+
+            <!-- BOTON -->
+
+            <Button
+                android:id="@+id/guardar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="GUARDAR PRODUCTO"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#2563EB"
+                android:layout_marginTop="30dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
