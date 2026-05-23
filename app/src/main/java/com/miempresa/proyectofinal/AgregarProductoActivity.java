@@ -1,20 +1,36 @@
 package com.miempresa.proyectofinal;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.miempresa.proyectofinal.DBHelper;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 public class AgregarProductoActivity extends AppCompatActivity {
 
     EditText nombre, descripcion, precio;
-    Button guardar;
+
+    Button guardar, seleccionarImagen;
+
+    ImageView imagenProducto;
 
     DBHelper dbHelper;
+
+    String rutaImagen = "";
+
+    ActivityResultLauncher<String> seleccionarLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +41,131 @@ public class AgregarProductoActivity extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         descripcion = findViewById(R.id.descripcion);
         precio = findViewById(R.id.precio);
+
         guardar = findViewById(R.id.guardar);
+
+        seleccionarImagen = findViewById(R.id.seleccionarImagen);
+
+        imagenProducto = findViewById(R.id.imagenProducto);
 
         dbHelper = new DBHelper(this);
 
+        seleccionarLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri -> {
+
+                    if(uri != null){
+
+                        try {
+
+                            rutaImagen = guardarImagenInterna(uri);
+
+                            Bitmap bitmap = BitmapFactory.decodeFile(rutaImagen);
+
+                            imagenProducto.setImageBitmap(bitmap);
+
+                            Toast.makeText(
+                                    this,
+                                    "Imagen seleccionada",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                        } catch (Exception e){
+
+                            Toast.makeText(
+                                    this,
+                                    "Error al cargar imagen",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    }
+                });
+
+        seleccionarImagen.setOnClickListener(v -> {
+
+            seleccionarLauncher.launch("image/*");
+        });
+
         guardar.setOnClickListener(v -> {
 
-            String nom = nombre.getText().toString();
-            String des = descripcion.getText().toString();
-            String preTexto = precio.getText().toString();
+            String nom = nombre.getText().toString().trim();
+            String des = descripcion.getText().toString().trim();
+            String preTexto = precio.getText().toString().trim();
 
             if(nom.isEmpty() || des.isEmpty() || preTexto.isEmpty()){
 
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        this,
+                        "Completa todos los campos",
+                        Toast.LENGTH_SHORT
+                ).show();
 
                 return;
             }
 
             double pre = Double.parseDouble(preTexto);
 
-            boolean insertado = dbHelper.insertarProducto(nom, des, pre);
+            boolean insertado = dbHelper.insertarProducto(
+                    nom,
+                    des,
+                    pre,
+                    rutaImagen
+            );
 
             if(insertado){
 
-                Toast.makeText(this, "Producto agregado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        this,
+                        "Producto agregado",
+                        Toast.LENGTH_SHORT
+                ).show();
 
                 finish();
+
+            } else {
+
+                Toast.makeText(
+                        this,
+                        "Error al guardar",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
+    }
+
+    private String guardarImagenInterna(Uri uri){
+
+        try {
+
+            InputStream inputStream =
+                    getContentResolver().openInputStream(uri);
+
+            Bitmap bitmap =
+                    BitmapFactory.decodeStream(inputStream);
+
+            String nombreArchivo =
+                    "img_" + System.currentTimeMillis() + ".jpg";
+
+            File archivo =
+                    new File(getFilesDir(), nombreArchivo);
+
+            FileOutputStream fos =
+                    new FileOutputStream(archivo);
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG,
+                    90,
+                    fos);
+
+            fos.flush();
+            fos.close();
+
+            return archivo.getAbsolutePath();
+
+        } catch (Exception e){
+
+            e.printStackTrace();
+
+            return "";
+        }
     }
 }

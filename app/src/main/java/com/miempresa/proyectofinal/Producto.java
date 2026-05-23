@@ -6,15 +6,22 @@ public class Producto {
     String nombre;
     String descripcion;
     double precio;
+    String imagen;
 
     public Producto() {
     }
 
-    public Producto(int id, String nombre, String descripcion, double precio) {
+    public Producto(int id,
+                    String nombre,
+                    String descripcion,
+                    double precio,
+                    String imagen) {
+
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -31,5 +38,9 @@ public class Producto {
 
     public double getPrecio() {
         return precio;
+    }
+
+    public String getImagen() {
+        return imagen;
     }
 }

@@ -30,7 +30,32 @@
             android:textSize="15sp"
             android:textColor="#64748B"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="10dp"/>
+
+        <!-- IMAGEN -->
+
+        <ImageView
+            android:id="@+id/imagenProducto"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:background="#E2E8F0"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="10dp"/>
+
+        <!-- BOTON IMAGEN -->
+
+        <Button
+            android:id="@+id/seleccionarImagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Imagen"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"/>
 
         <!-- CONTENEDOR -->
 
@@ -109,7 +134,7 @@
                 android:backgroundTint="#2563EB"
                 android:layout_marginTop="8dp"/>
 
-            <!-- BOTON -->
+            <!-- BOTON GUARDAR -->
 
             <Button
                 android:id="@+id/guardar"
