@@ -5,106 +5,98 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginHorizontal="12dp"
-    android:layout_marginTop="10dp"
     android:padding="18dp"
     android:background="#FFFFFF"
     android:elevation="8dp">
 
-    <!-- ENCABEZADO -->
+    <!-- PARTE SUPERIOR -->
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content">
 
-        <!-- ICONO REEMPLAZADO -->
+        <!-- IMAGEN -->
+
         <ImageView
             android:id="@+id/imgProducto"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:background="#DBEAFE"
-            android:padding="2dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_menu_gallery"/>
+            android:src="@android:drawable/ic_menu_gallery"
+            android:background="#DBEAFE"/>
 
-        <!-- INFORMACION -->
+        <!-- INFO -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="15dp">
+            android:layout_toEndOf="@id/imgProducto"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <!-- NOMBRE -->
 
             <TextView
                 android:id="@+id/txtNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Producto"
+                android:text="Nombre Producto"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                android:textColor="#0F172A"/>
+                android:textColor="#0F172A"
+                android:maxLines="2"/>
+
+            <!-- DESCRIPCION -->
 
             <TextView
+                android:id="@+id/txtDescripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Producto registrado"
-                android:textSize="13sp"
+                android:text="Descripción del producto"
+                android:textSize="14sp"
                 android:textColor="#64748B"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="6dp"
+                android:maxLines="3"/>
+
+            <!-- PRECIO -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:tint="#2563EB"/>
+
+                <TextView
+                    android:id="@+id/txtPrecio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#2563EB"
+                    android:layout_marginStart="6dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <!-- ICONO -->
 
-    <!-- DESCRIPCION -->
+        <ImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_alignParentEnd="true"
+            android:src="@android:drawable/presence_online"
+            android:padding="10dp"
+            android:background="#EFF6FF"/>
 
-    <TextView
-        android:id="@+id/txtDescripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descripción del producto"
-        android:textSize="15sp"
-        android:textColor="#475569"
-        android:layout_marginTop="18dp"
-        android:lineSpacingExtra="3dp"/>
-
-    <!-- LINEA -->
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E2E8F0"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="15dp"/>
-
-    <!-- PRECIO -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Precio"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="#334155"/>
-
-        <TextView
-            android:id="@+id/txtPrecio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$0"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#2563EB"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -2,26 +2,30 @@ package com.miempresa.proyectofinal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.miempresa.proyectofinal.DBHelper;
-import com.miempresa.proyectofinal.LoginActivity;
-import com.miempresa.proyectofinal.Producto;
-import com.miempresa.proyectofinal.ProductoAdapter;
 
 import java.util.ArrayList;
 
 public class ProductosActivity extends AppCompatActivity {
 
     ListView listView;
+
     BottomNavigationView bottomNavigation;
+
+    EditText buscador;
 
     DBHelper dbHelper;
 
     ArrayList<Producto> listaProductos;
+
+    ArrayList<Producto> listaFiltrada;
 
     ProductoAdapter adapter;
 
@@ -30,76 +34,192 @@ public class ProductosActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        try {
-            setContentView(R.layout.activity_productos);
+        setContentView(R.layout.activity_productos);
 
-            // Mapeo de componentes desde el XML
-            listView = findViewById(R.id.listView);
-            bottomNavigation = findViewById(R.id.bottomNavigation);
+        // COMPONENTES
 
-            // Configuración inicial del menú de navegación
-            bottomNavigation.setSelectedItemId(R.id.nav_productos);
+        listView = findViewById(R.id.listView);
 
-            dbHelper = new DBHelper(this);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
 
-            // Carga los productos inicialmente
-            cargarProductos();
+        buscador = findViewById(R.id.buscador);
 
-            // Listener para controlar las opciones de navegación inferior
-            bottomNavigation.setOnItemSelectedListener(item -> {
+        // DB
 
-                if(item.getItemId() == R.id.nav_productos){
-                    return true;
-                }
+        dbHelper = new DBHelper(this);
 
-                else if(item.getItemId() == R.id.nav_agregar){
-                    startActivity(new Intent(this, AgregarProductoActivity.class));
-                    return true;
-                }
+        // LISTAS
 
-                else if(item.getItemId() == R.id.nav_logout){
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                }
+        listaProductos = new ArrayList<>();
 
-                return false;
-            });
+        listaFiltrada = new ArrayList<>();
 
-            // Listener para interactuar con cada fila de la lista de productos
-            listView.setOnItemClickListener((parent, view, position, id) -> {
+        // CARGAR
 
-                Producto producto = listaProductos.get(position);
+        cargarProductos();
 
-                Intent i = new Intent(this, DetalleProductoActivity.class);
+        // BUSCADOR
 
-                i.putExtra("id", producto.getId());
-                i.putExtra("nombre", producto.getNombre());
-                i.putExtra("descripcion", producto.getDescripcion());
-                i.putExtra("precio", producto.getPrecio());
+        buscador.addTextChangedListener(new TextWatcher() {
 
-                startActivity(i);
-            });
+            @Override
+            public void beforeTextChanged(CharSequence s,
+                                          int start,
+                                          int count,
+                                          int after) {
 
-        } catch (Exception e){
-            // Muestra una alerta emergente en caso de que ocurra un error fatal en onCreate
-            android.widget.Toast.makeText(this,
-                    e.toString(),
-                    android.widget.Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s,
+                                      int start,
+                                      int before,
+                                      int count) {
+
+                filtrarProductos(s.toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // MENU
+
+        bottomNavigation.setSelectedItemId(R.id.nav_productos);
+
+        bottomNavigation.setOnItemSelectedListener(item -> {
+
+            if(item.getItemId() == R.id.nav_productos){
+
+                return true;
+
+            } else if(item.getItemId() == R.id.nav_agregar){
+
+                startActivity(
+                        new Intent(
+                                this,
+                                AgregarProductoActivity.class
+                        )
+                );
+
+                return true;
+
+            } else if(item.getItemId() == R.id.nav_logout){
+
+                startActivity(
+                        new Intent(
+                                this,
+                                LoginActivity.class
+                        )
+                );
+
+                finish();
+
+                return true;
+            }
+
+            return false;
+        });
+
+        // CLICK PRODUCTO
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+
+            Producto producto = listaFiltrada.get(position);
+
+            Intent i = new Intent(
+                    this,
+                    DetalleProductoActivity.class
+            );
+
+            i.putExtra("id", producto.getId());
+
+            i.putExtra("nombre", producto.getNombre());
+
+            i.putExtra("descripcion", producto.getDescripcion());
+
+            i.putExtra("precio", producto.getPrecio());
+
+            i.putExtra("imagen", producto.getImagen());
+
+            startActivity(i);
+        });
+    }
+
+    // CARGAR PRODUCTOS
+
+    private void cargarProductos(){
+
+        listaProductos.clear();
+
+        listaProductos.addAll(
+                dbHelper.obtenerProductos()
+        );
+
+        listaFiltrada.clear();
+
+        listaFiltrada.addAll(listaProductos);
+
+        if(adapter == null){
+
+            adapter = new ProductoAdapter(
+                    this,
+                    listaFiltrada
+            );
+
+            listView.setAdapter(adapter);
+
+        } else {
+
+            adapter.notifyDataSetChanged();
         }
     }
 
-    private void cargarProductos(){
-        listaProductos = dbHelper.obtenerProductos();
-        adapter = new ProductoAdapter(this, listaProductos);
-        listView.setAdapter(adapter);
+    // FILTRAR PRODUCTOS
+
+    private void filtrarProductos(String texto){
+
+        listaFiltrada.clear();
+
+        if(texto.trim().isEmpty()){
+
+            listaFiltrada.addAll(listaProductos);
+
+        } else {
+
+            texto = texto.toLowerCase().trim();
+
+            for(Producto producto : listaProductos){
+
+                String nombre =
+                        producto.getNombre().toLowerCase();
+
+                String descripcion =
+                        producto.getDescripcion().toLowerCase();
+
+                if(nombre.contains(texto) ||
+                        descripcion.contains(texto)){
+
+                    listaFiltrada.add(producto);
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
+
         super.onResume();
-        // Refresca la lista automáticamente cuando regresas a esta pantalla
+
         cargarProductos();
+
+        filtrarProductos(
+                buscador.getText().toString()
+        );
     }
 }

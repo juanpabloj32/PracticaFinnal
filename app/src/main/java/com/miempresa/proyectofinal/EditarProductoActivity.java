@@ -1,20 +1,37 @@
 package com.miempresa.proyectofinal;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 public class EditarProductoActivity extends AppCompatActivity {
 
-    EditText nombre, descripcion, precio;
-    Button actualizar;
+    EditText nombreEditar, descripcionEditar, precioEditar;
+
+    Button actualizar, cambiarImagen;
+
+    ImageView imagenEditar;
 
     DBHelper dbHelper;
 
     int id;
+
+    String rutaImagen = "";
+
+    ActivityResultLauncher<String> seleccionarLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,43 +39,163 @@ public class EditarProductoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_producto);
 
-        nombre = findViewById(R.id.nombreEditar);
-        descripcion = findViewById(R.id.descripcionEditar);
-        precio = findViewById(R.id.precioEditar);
+        nombreEditar = findViewById(R.id.nombreEditar);
+        descripcionEditar = findViewById(R.id.descripcionEditar);
+        precioEditar = findViewById(R.id.precioEditar);
+
         actualizar = findViewById(R.id.actualizar);
+
+        cambiarImagen = findViewById(R.id.cambiarImagen);
+
+        imagenEditar = findViewById(R.id.imagenEditar);
 
         dbHelper = new DBHelper(this);
 
         id = getIntent().getIntExtra("id", 0);
 
-        nombre.setText(getIntent().getStringExtra("nombre"));
-        descripcion.setText(getIntent().getStringExtra("descripcion"));
-        precio.setText(String.valueOf(
-                getIntent().getDoubleExtra("precio", 0)
-        ));
+        nombreEditar.setText(
+                getIntent().getStringExtra("nombre")
+        );
+
+        descripcionEditar.setText(
+                getIntent().getStringExtra("descripcion")
+        );
+
+        precioEditar.setText(
+                String.valueOf(
+                        getIntent().getDoubleExtra("precio",0)
+                )
+        );
+
+        rutaImagen = getIntent().getStringExtra("imagen");
+
+        if(rutaImagen != null && !rutaImagen.isEmpty()){
+
+            File file = new File(rutaImagen);
+
+            if(file.exists()){
+
+                Bitmap bitmap =
+                        BitmapFactory.decodeFile(file.getAbsolutePath());
+
+                imagenEditar.setImageBitmap(bitmap);
+            }
+        }
+
+        seleccionarLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri -> {
+
+                    if(uri != null){
+
+                        try {
+
+                            rutaImagen = guardarImagenInterna(uri);
+
+                            Bitmap bitmap =
+                                    BitmapFactory.decodeFile(rutaImagen);
+
+                            imagenEditar.setImageBitmap(bitmap);
+
+                        } catch (Exception e){
+
+                            Toast.makeText(
+                                    this,
+                                    "Error al cargar imagen",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    }
+                });
+
+        cambiarImagen.setOnClickListener(v -> {
+
+            seleccionarLauncher.launch("image/*");
+        });
 
         actualizar.setOnClickListener(v -> {
 
-            String nom = nombre.getText().toString();
-            String des = descripcion.getText().toString();
-            String preTexto = precio.getText().toString();
+            String nom =
+                    nombreEditar.getText().toString().trim();
 
-            if(nom.isEmpty() || des.isEmpty() || preTexto.isEmpty()){
+            String des =
+                    descripcionEditar.getText().toString().trim();
 
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+            String preTexto =
+                    precioEditar.getText().toString().trim();
+
+            if(nom.isEmpty() ||
+                    des.isEmpty() ||
+                    preTexto.isEmpty()){
+
+                Toast.makeText(
+                        this,
+                        "Completa todos los campos",
+                        Toast.LENGTH_SHORT
+                ).show();
+
                 return;
             }
 
             double pre = Double.parseDouble(preTexto);
 
-            boolean actualizado = dbHelper.actualizarProducto(id, nom, des, pre);
+            boolean actualizado =
+                    dbHelper.actualizarProducto(
+                            id,
+                            nom,
+                            des,
+                            pre,
+                            rutaImagen
+                    );
 
             if(actualizado){
 
-                Toast.makeText(this, "Producto actualizado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        this,
+                        "Producto actualizado",
+                        Toast.LENGTH_SHORT
+                ).show();
 
                 finish();
             }
         });
+    }
+
+    private String guardarImagenInterna(Uri uri){
+
+        try {
+
+            InputStream inputStream =
+                    getContentResolver().openInputStream(uri);
+
+            Bitmap bitmap =
+                    BitmapFactory.decodeStream(inputStream);
+
+            String nombreArchivo =
+                    "img_" + System.currentTimeMillis() + ".jpg";
+
+            File archivo =
+                    new File(getFilesDir(), nombreArchivo);
+
+            FileOutputStream fos =
+                    new FileOutputStream(archivo);
+
+            bitmap.compress(
+                    Bitmap.CompressFormat.JPEG,
+                    90,
+                    fos
+            );
+
+            fos.flush();
+            fos.close();
+
+            return archivo.getAbsolutePath();
+
+        } catch (Exception e){
+
+            e.printStackTrace();
+
+            return "";
+        }
     }
 }

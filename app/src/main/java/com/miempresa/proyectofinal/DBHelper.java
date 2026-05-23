@@ -76,7 +76,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return lista;
     }
 
-    public boolean actualizarProducto(int id, String nombre, String descripcion, double precio){
+    // REEMPLAZADO: Ahora el método acepta el parámetro 'imagen' y lo actualiza en la base de datos
+    public boolean actualizarProducto(int id, String nombre, String descripcion, double precio, String imagen){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -84,6 +85,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("nombre", nombre);
         values.put("descripcion", descripcion);
         values.put("precio", precio);
+        // NUEVO: Agregado debajo de precio para actualizar la imagen
+        values.put("imagen", imagen);
 
         long result = db.update("productos", values, "id=?", new String[]{String.valueOf(id)});
 

@@ -48,17 +48,16 @@ public class DetalleProductoActivity extends AppCompatActivity {
             finish();
         });
 
-        // Código unificado: Ahora envía id, nombre, descripción y el precio limpio como Double
         editar.setOnClickListener(v -> {
 
             Intent intent = new Intent(this, EditarProductoActivity.class);
 
+            // Nuevos putExtra agregados debajo del Intent
             intent.putExtra("id", id);
             intent.putExtra("nombre", txtNombre.getText().toString());
             intent.putExtra("descripcion", txtDescripcion.getText().toString());
-
-            String precioTexto = txtPrecio.getText().toString().replace("$", "");
-            intent.putExtra("precio", Double.parseDouble(precioTexto));
+            intent.putExtra("precio", getIntent().getDoubleExtra("precio", 0));
+            intent.putExtra("imagen", getIntent().getStringExtra("imagen"));
 
             startActivity(intent);
         });

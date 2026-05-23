@@ -3,9 +3,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="ProyectoFinal"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/t"
+        android:label="Tiendita"
+        android:roundIcon="@drawable/t"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">

@@ -6,48 +6,75 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#F5F7FA"
+    android:background="#EAEFF5"
     android:padding="24dp">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:src="@drawable/carrito"
-        android:scaleType="centerCrop"
-        android:background="#2196F3"
-        android:padding="20dp" />
-
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
+    <!-- Contenedor principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ProyectoFinal"
-        android:textColor="#212121"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:layout_marginTop="25dp"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="35dp"
+        android:background="#FFFFFF"
+        android:elevation="10dp">
 
-    <TextView
-        android:id="@+id/subtitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sistema de Inventario"
-        android:textColor="#757575"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"/>
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:src="@drawable/t"
+            android:scaleType="fitCenter"
+            android:padding="10dp" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"/>
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi Tiendita"
+            android:textColor="#0F172A"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="22dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cargando..."
-        android:textColor="#9E9E9E"
-        android:textSize="16sp"
-        android:layout_marginTop="12dp"/>
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/subtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sistema de inventario"
+            android:textColor="#64748B"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="6dp" />
+
+        <!-- Separador -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D6DCE5"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp" />
+
+        <!-- Progress -->
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminateTint="#1E40AF" />
+
+        <!-- Texto carga -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cargando..."
+            android:textColor="#94A3B8"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="14dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

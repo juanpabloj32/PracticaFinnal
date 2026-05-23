@@ -1,49 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="#F1F5F9">
 
-    <TextView
-        android:id="@+id/txtNombre"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingBottom="10dp"/>
+        android:orientation="vertical"
+        android:padding="22dp">
 
-    <TextView
-        android:id="@+id/txtDescripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descripción"
-        android:textSize="18sp"
-        android:paddingBottom="10dp"/>
+        <!-- ENCABEZADO -->
 
-    <TextView
-        android:id="@+id/txtPrecio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="$0"
-        android:textSize="20sp"
-        android:textColor="#4CAF50"
-        android:paddingBottom="20dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp">
 
-    <Button
-        android:id="@+id/editar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Editar"/>
+            <!-- TITULOS -->
 
-    <Button
-        android:id="@+id/eliminar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Eliminar"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#F44336"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mi Tiendita"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="#0F172A"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Información completa del producto"
+                    android:textSize="15sp"
+                    android:textColor="#64748B"
+                    android:layout_marginTop="5dp"/>
+
+            </LinearLayout>
+
+            <!-- ICONO -->
+
+            <ImageView
+                android:id="@+id/iconoProducto"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/t"
+                android:padding="12dp"
+                android:background="#FFFFFF"
+                android:elevation="6dp"/>
+
+        </RelativeLayout>
+
+        <!-- CONTENEDOR PRINCIPAL -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="28dp"
+            android:elevation="10dp">
+
+            <!-- IMAGEN PRODUCTO -->
+
+            <ImageView
+                android:id="@+id/imgProducto"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_gallery"
+                android:scaleType="centerCrop"
+                android:background="#E2E8F0"
+                android:padding="5dp"
+                android:layout_marginBottom="25dp"/>
+
+            <!-- NOMBRE -->
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#0F172A"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="16dp"/>
+
+            <!-- DESCRIPCION -->
+
+            <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textSize="17sp"
+                android:textColor="#475569"
+                android:lineSpacingExtra="3dp"
+                android:paddingBottom="22dp"/>
+
+            <!-- PRECIO -->
+
+            <TextView
+                android:id="@+id/txtPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#16A34A"
+                android:background="#ECFDF5"
+                android:padding="12dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:layout_marginBottom="30dp"/>
+
+            <!-- BOTON EDITAR -->
+
+            <Button
+                android:id="@+id/editar"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="EDITAR PRODUCTO"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#2563EB"/>
+
+            <!-- BOTON ELIMINAR -->
+
+            <Button
+                android:id="@+id/eliminar"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="ELIMINAR PRODUCTO"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#DC2626"
+                android:layout_marginTop="14dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

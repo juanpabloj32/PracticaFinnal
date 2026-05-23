@@ -4,13 +4,125 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F1F5F9">
 
-    <ListView
-        android:id="@+id/listView"
+    <!-- CONTENIDO -->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigation"/>
+        android:layout_above="@id/bottomNavigation"
+        android:orientation="vertical"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingTop="18dp">
+
+        <!-- HEADER -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <!-- TITULOS -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mi Tiendita"
+                    android:textSize="33sp"
+                    android:textStyle="bold"
+                    android:textColor="#0F172A"
+                    android:fontFamily="sans-serif-black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visualiza y administra tus productos"
+                    android:textSize="14sp"
+                    android:textColor="#64748B"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+
+            <!-- PERFIL -->
+
+            <ImageView
+                android:id="@+id/iconoPerfil"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/t"
+                android:padding="8dp"
+                android:background="#FFFFFF"
+                android:elevation="8dp"/>
+
+        </RelativeLayout>
+
+        <!-- BUSCADOR -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:elevation="6dp"
+            android:layout_marginBottom="18dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_search"
+                android:tint="#64748B"/>
+
+            <EditText
+                android:id="@+id/buscador"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Buscar productos..."
+                android:textSize="15sp"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8"
+                android:background="@android:color/transparent"
+                android:paddingStart="14dp"/>
+
+        </LinearLayout>
+
+        <!-- CONTADOR -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Productos registrados"
+            android:textStyle="bold"
+            android:textColor="#334155"
+            android:textSize="15sp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- LISTA -->
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="16dp"
+            android:paddingBottom="20dp"
+            android:clipToPadding="false"
+            android:scrollbars="none"/>
+
+    </LinearLayout>
+
+    <!-- BOTTOM NAVIGATION -->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -18,6 +130,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
+        android:elevation="20dp"
+        app:itemIconTint="#2563EB"
+        app:itemTextColor="#2563EB"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_menu"/>
 
 </RelativeLayout>

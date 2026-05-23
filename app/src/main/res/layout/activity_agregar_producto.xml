@@ -4,58 +4,89 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEF2F7">
+    android:background="#F1F5F9">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="25dp">
+        android:padding="22dp">
 
-        <!-- TITULO -->
+        <!-- ENCABEZADO -->
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agregar Producto"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#1E293B"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Registra un nuevo producto al sistema"
-            android:textSize="15sp"
-            android:textColor="#64748B"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
+            <!-- TITULOS -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mi Tiendita"
+                    android:textSize="31sp"
+                    android:textStyle="bold"
+                    android:textColor="#0F172A"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registra un nuevo producto al sistema"
+                    android:textSize="15sp"
+                    android:textColor="#64748B"
+                    android:layout_marginTop="5dp"/>
+
+            </LinearLayout>
+
+            <!-- ICONO -->
+
+            <ImageView
+                android:id="@+id/iconoAgregar"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/t"
+                android:padding="12dp"
+                android:background="#FFFFFF"
+                android:elevation="6dp"/>
+
+        </RelativeLayout>
 
         <!-- IMAGEN -->
 
         <ImageView
             android:id="@+id/imagenProducto"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
             android:layout_gravity="center"
             android:src="@android:drawable/ic_menu_gallery"
-            android:background="#E2E8F0"
-            android:padding="4dp"
+            android:background="#FFFFFF"
+            android:padding="6dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:layout_marginTop="10dp"/>
+            android:elevation="5dp"/>
 
         <!-- BOTON IMAGEN -->
 
         <Button
             android:id="@+id/seleccionarImagen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleccionar Imagen"
+            android:layout_height="55dp"
+            android:text="SELECCIONAR IMAGEN"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:backgroundTint="#334155"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="22dp"/>
 
         <!-- CONTENEDOR -->
 
@@ -64,8 +95,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#FFFFFF"
-            android:padding="25dp"
-            android:elevation="8dp">
+            android:padding="26dp"
+            android:elevation="10dp">
 
             <!-- NOMBRE -->
 
@@ -80,12 +111,13 @@
             <EditText
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="58dp"
                 android:hint="Ejemplo: Laptop Gamer"
-                android:padding="15dp"
-                android:textColor="#000000"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:textColor="#111827"
                 android:textColorHint="#94A3B8"
-                android:backgroundTint="#2563EB"
+                android:background="#F8FAFC"
                 android:layout_marginTop="8dp"/>
 
             <!-- DESCRIPCION -->
@@ -97,18 +129,18 @@
                 android:textStyle="bold"
                 android:textColor="#1E293B"
                 android:textSize="14sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="22dp"/>
 
             <EditText
                 android:id="@+id/descripcion"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="100dp"
                 android:hint="Describe el producto"
                 android:gravity="top"
-                android:padding="15dp"
-                android:textColor="#000000"
+                android:padding="18dp"
+                android:textColor="#111827"
                 android:textColorHint="#94A3B8"
-                android:backgroundTint="#2563EB"
+                android:background="#F8FAFC"
                 android:layout_marginTop="8dp"/>
 
             <!-- PRECIO -->
@@ -120,18 +152,19 @@
                 android:textStyle="bold"
                 android:textColor="#1E293B"
                 android:textSize="14sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="22dp"/>
 
             <EditText
                 android:id="@+id/precio"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="58dp"
                 android:hint="Ejemplo: 15000"
                 android:inputType="numberDecimal"
-                android:padding="15dp"
-                android:textColor="#000000"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:textColor="#111827"
                 android:textColorHint="#94A3B8"
-                android:backgroundTint="#2563EB"
+                android:background="#F8FAFC"
                 android:layout_marginTop="8dp"/>
 
             <!-- BOTON GUARDAR -->
@@ -139,13 +172,13 @@
             <Button
                 android:id="@+id/guardar"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="58dp"
                 android:text="GUARDAR PRODUCTO"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#2563EB"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="32dp"/>
 
         </LinearLayout>
 
