@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -12,15 +11,11 @@
         android:orientation="vertical"
         android:padding="22dp">
 
-        <!-- ENCABEZADO -->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="25dp">
-
-            <!-- TITULOS -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -46,8 +41,6 @@
 
             </LinearLayout>
 
-            <!-- ICONO -->
-
             <ImageView
                 android:id="@+id/iconoProducto"
                 android:layout_width="52dp"
@@ -60,8 +53,6 @@
 
         </RelativeLayout>
 
-        <!-- CONTENEDOR PRINCIPAL -->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,8 +60,6 @@
             android:background="#FFFFFF"
             android:padding="28dp"
             android:elevation="10dp">
-
-            <!-- IMAGEN PRODUCTO -->
 
             <ImageView
                 android:id="@+id/imgProducto"
@@ -83,8 +72,6 @@
                 android:padding="5dp"
                 android:layout_marginBottom="25dp"/>
 
-            <!-- NOMBRE -->
-
             <TextView
                 android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
@@ -96,8 +83,6 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="16dp"/>
 
-            <!-- DESCRIPCION -->
-
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="match_parent"
@@ -107,8 +92,6 @@
                 android:textColor="#475569"
                 android:lineSpacingExtra="3dp"
                 android:paddingBottom="22dp"/>
-
-            <!-- PRECIO -->
 
             <TextView
                 android:id="@+id/txtPrecio"
@@ -124,7 +107,15 @@
                 android:paddingEnd="18dp"
                 android:layout_marginBottom="30dp"/>
 
-            <!-- BOTON EDITAR -->
+            <TextView
+                android:id="@+id/txtStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stock: 0"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#EA580C"
+                android:layout_marginBottom="25dp"/>
 
             <Button
                 android:id="@+id/editar"
@@ -135,8 +126,6 @@
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#2563EB"/>
-
-            <!-- BOTON ELIMINAR -->
 
             <Button
                 android:id="@+id/eliminar"

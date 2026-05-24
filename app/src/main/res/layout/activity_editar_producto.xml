@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -12,8 +11,6 @@
         android:orientation="vertical"
         android:padding="25dp">
 
-        <!-- TITULO -->
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,8 +19,6 @@
             android:textStyle="bold"
             android:textColor="#1E293B"
             android:layout_marginTop="20dp"/>
-
-        <!-- IMAGEN -->
 
         <ImageView
             android:id="@+id/imagenEditar"
@@ -36,8 +31,6 @@
             android:scaleType="centerCrop"
             android:layout_marginTop="20dp"/>
 
-        <!-- BOTON IMAGEN -->
-
         <Button
             android:id="@+id/cambiarImagen"
             android:layout_width="match_parent"
@@ -46,8 +39,6 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"/>
-
-        <!-- CONTENEDOR -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,6 +69,15 @@
                 android:layout_height="55dp"
                 android:hint="Precio"
                 android:inputType="numberDecimal"
+                android:padding="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <EditText
+                android:id="@+id/stockEditar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Stock"
+                android:inputType="number"
                 android:padding="15dp"
                 android:layout_marginTop="15dp"/>
 

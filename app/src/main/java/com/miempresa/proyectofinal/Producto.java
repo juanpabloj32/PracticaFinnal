@@ -7,6 +7,7 @@ public class Producto {
     String descripcion;
     double precio;
     String imagen;
+    int stock;
 
     public Producto() {
     }
@@ -15,13 +16,15 @@ public class Producto {
                     String nombre,
                     String descripcion,
                     double precio,
-                    String imagen) {
+                    String imagen,
+                    int stock) {
 
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
+        this.stock = stock;
     }
 
     public int getId() {
@@ -42,5 +45,9 @@ public class Producto {
 
     public String getImagen() {
         return imagen;
+    }
+
+    public int getStock() {
+        return stock;
     }
 }

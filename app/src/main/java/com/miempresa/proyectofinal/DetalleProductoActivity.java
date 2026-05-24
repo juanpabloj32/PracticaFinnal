@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DetalleProductoActivity extends AppCompatActivity {
 
-    TextView txtNombre, txtDescripcion, txtPrecio;
+    // MODIFICADO: Se añade txtStock a la declaración de variables
+    TextView txtNombre, txtDescripcion, txtPrecio, txtStock;
     Button editar, eliminar;
 
     DBHelper dbHelper;
@@ -26,6 +27,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
         txtNombre = findViewById(R.id.txtNombre);
         txtDescripcion = findViewById(R.id.txtDescripcion);
         txtPrecio = findViewById(R.id.txtPrecio);
+        // NUEVO: Se conecta el componente del diseño con la variable Java
+        txtStock = findViewById(R.id.txtStock);
 
         editar = findViewById(R.id.editar);
         eliminar = findViewById(R.id.eliminar);
@@ -40,6 +43,12 @@ public class DetalleProductoActivity extends AppCompatActivity {
         txtDescripcion.setText(i.getStringExtra("descripcion"));
         txtPrecio.setText("$" + i.getDoubleExtra("precio", 0));
 
+        // NUEVO: Se muestra la cantidad de stock disponible en la interfaz
+        txtStock.setText(
+                "Stock disponible: " +
+                        getIntent().getIntExtra("stock", 0)
+        );
+
         eliminar.setOnClickListener(v -> {
 
             dbHelper.eliminarProducto(id);
@@ -52,12 +61,17 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, EditarProductoActivity.class);
 
-            // Nuevos putExtra agregados debajo del Intent
             intent.putExtra("id", id);
             intent.putExtra("nombre", txtNombre.getText().toString());
             intent.putExtra("descripcion", txtDescripcion.getText().toString());
             intent.putExtra("precio", getIntent().getDoubleExtra("precio", 0));
             intent.putExtra("imagen", getIntent().getStringExtra("imagen"));
+
+            // UNIFICADO: Envío del stock hacia la actividad de edición
+            intent.putExtra(
+                    "stock",
+                    getIntent().getIntExtra("stock", 0)
+            );
 
             startActivity(intent);
         });

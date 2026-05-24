@@ -55,6 +55,10 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         TextView txtPrecio =
                 convertView.findViewById(R.id.txtPrecio);
 
+        // NUEVO: Se conecta el componente del diseño de la fila (item_producto)
+        TextView txtStock =
+                convertView.findViewById(R.id.txtStock);
+
         ImageView imgProducto =
                 convertView.findViewById(R.id.imgProducto);
 
@@ -63,6 +67,11 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         txtDescripcion.setText(producto.getDescripcion());
 
         txtPrecio.setText("$" + producto.getPrecio());
+
+        // NUEVO: Se asigna la cantidad de stock en la vista de la fila
+        txtStock.setText(
+                "Stock: " + producto.getStock()
+        );
 
         if(producto.getImagen() != null &&
                 !producto.getImagen().isEmpty()){

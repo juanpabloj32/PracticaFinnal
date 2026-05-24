@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,13 +8,9 @@
     android:background="#FFFFFF"
     android:elevation="8dp">
 
-    <!-- PARTE SUPERIOR -->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <!-- IMAGEN -->
 
         <ImageView
             android:id="@+id/imgProducto"
@@ -25,16 +20,12 @@
             android:src="@android:drawable/ic_menu_gallery"
             android:background="#DBEAFE"/>
 
-        <!-- INFO -->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/imgProducto"
             android:layout_marginStart="16dp"
             android:orientation="vertical">
-
-            <!-- NOMBRE -->
 
             <TextView
                 android:id="@+id/txtNombre"
@@ -46,8 +37,6 @@
                 android:textColor="#0F172A"
                 android:maxLines="2"/>
 
-            <!-- DESCRIPCION -->
-
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="wrap_content"
@@ -57,8 +46,6 @@
                 android:textColor="#64748B"
                 android:layout_marginTop="6dp"
                 android:maxLines="3"/>
-
-            <!-- PRECIO -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -85,9 +72,17 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txtStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stock: 0"
+                android:textStyle="bold"
+                android:textColor="#EA580C"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"/>
 
-        <!-- ICONO -->
+        </LinearLayout>
 
         <ImageView
             android:layout_width="42dp"

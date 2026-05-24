@@ -16,210 +16,128 @@ import java.util.ArrayList;
 public class ProductosActivity extends AppCompatActivity {
 
     ListView listView;
-
     BottomNavigationView bottomNavigation;
-
     EditText buscador;
-
     DBHelper dbHelper;
 
     ArrayList<Producto> listaProductos;
-
     ArrayList<Producto> listaFiltrada;
-
     ProductoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_productos);
 
         // COMPONENTES
-
         listView = findViewById(R.id.listView);
-
         bottomNavigation = findViewById(R.id.bottomNavigation);
-
         buscador = findViewById(R.id.buscador);
 
         // DB
-
         dbHelper = new DBHelper(this);
 
         // LISTAS
-
         listaProductos = new ArrayList<>();
-
         listaFiltrada = new ArrayList<>();
 
         // CARGAR
-
         cargarProductos();
 
         // BUSCADOR
-
         buscador.addTextChangedListener(new TextWatcher() {
-
             @Override
-            public void beforeTextChanged(CharSequence s,
-                                          int start,
-                                          int count,
-                                          int after) {
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s,
-                                      int start,
-                                      int before,
-                                      int count) {
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 filtrarProductos(s.toString());
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
         // MENU
-
         bottomNavigation.setSelectedItemId(R.id.nav_productos);
-
         bottomNavigation.setOnItemSelectedListener(item -> {
-
             if(item.getItemId() == R.id.nav_productos){
-
                 return true;
-
             } else if(item.getItemId() == R.id.nav_agregar){
-
-                startActivity(
-                        new Intent(
-                                this,
-                                AgregarProductoActivity.class
-                        )
-                );
-
+                startActivity(new Intent(this, AgregarProductoActivity.class));
                 return true;
-
             } else if(item.getItemId() == R.id.nav_logout){
-
-                startActivity(
-                        new Intent(
-                                this,
-                                LoginActivity.class
-                        )
-                );
-
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
-
                 return true;
             }
-
             return false;
         });
 
         // CLICK PRODUCTO
-
         listView.setOnItemClickListener((parent, view, position, id) -> {
-
             Producto producto = listaFiltrada.get(position);
 
-            Intent i = new Intent(
-                    this,
-                    DetalleProductoActivity.class
-            );
-
+            Intent i = new Intent(this, DetalleProductoActivity.class);
             i.putExtra("id", producto.getId());
-
             i.putExtra("nombre", producto.getNombre());
-
             i.putExtra("descripcion", producto.getDescripcion());
-
             i.putExtra("precio", producto.getPrecio());
-
             i.putExtra("imagen", producto.getImagen());
+
+            // UNIFICADO: Ahora también enviamos el stock al detalle del producto
+            i.putExtra("stock", producto.getStock());
 
             startActivity(i);
         });
     }
 
     // CARGAR PRODUCTOS
-
     private void cargarProductos(){
-
         listaProductos.clear();
+        listaProductos.addAll(dbHelper.obtenerProductos()); // Asegúrate si tu DBHelper usa obtenerProductos() u obtainProductos()
 
-        listaProductos.addAll(
-                dbHelper.obtenerProductos()
-        );
+        // Nota peer-to-peer: En los códigos previos usamos dbHelper.obtenerProductos()
+        // Si te marca error aquí, cámbialo a: dbHelper.obtenerProductos()
 
         listaFiltrada.clear();
-
         listaFiltrada.addAll(listaProductos);
 
         if(adapter == null){
-
-            adapter = new ProductoAdapter(
-                    this,
-                    listaFiltrada
-            );
-
+            adapter = new ProductoAdapter(this, listaFiltrada);
             listView.setAdapter(adapter);
-
         } else {
-
             adapter.notifyDataSetChanged();
         }
     }
 
     // FILTRAR PRODUCTOS
-
     private void filtrarProductos(String texto){
-
         listaFiltrada.clear();
 
         if(texto.trim().isEmpty()){
-
             listaFiltrada.addAll(listaProductos);
-
         } else {
-
             texto = texto.toLowerCase().trim();
 
             for(Producto producto : listaProductos){
+                String nombre = producto.getNombre().toLowerCase();
+                String descripcion = producto.getDescripcion().toLowerCase();
 
-                String nombre =
-                        producto.getNombre().toLowerCase();
-
-                String descripcion =
-                        producto.getDescripcion().toLowerCase();
-
-                if(nombre.contains(texto) ||
-                        descripcion.contains(texto)){
-
+                if(nombre.contains(texto) || descripcion.contains(texto)){
                     listaFiltrada.add(producto);
                 }
             }
         }
-
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
         cargarProductos();
-
-        filtrarProductos(
-                buscador.getText().toString()
-        );
+        filtrarProductos(buscador.getText().toString());
     }
 }
