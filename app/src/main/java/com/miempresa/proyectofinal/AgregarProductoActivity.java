@@ -20,7 +20,6 @@ import java.io.InputStream;
 
 public class AgregarProductoActivity extends AppCompatActivity {
 
-    // MODIFICADO: Se añade "stock" a la declaración de variables
     EditText nombre, descripcion, precio, stock;
 
     Button guardar, seleccionarImagen;
@@ -42,7 +41,6 @@ public class AgregarProductoActivity extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         descripcion = findViewById(R.id.descripcion);
         precio = findViewById(R.id.precio);
-        // NUEVO: Se conecta el componente del diseño con la variable Java
         stock = findViewById(R.id.stock);
 
         guardar = findViewById(R.id.guardar);
@@ -94,10 +92,8 @@ public class AgregarProductoActivity extends AppCompatActivity {
             String nom = nombre.getText().toString().trim();
             String des = descripcion.getText().toString().trim();
             String preTexto = precio.getText().toString().trim();
-            // NUEVO: Se obtiene el texto del campo de stock
             String stockTexto = stock.getText().toString().trim();
 
-            // MODIFICADO: Se incluye stockTexto en la validación de campos vacíos
             if(nom.isEmpty() ||
                     des.isEmpty() ||
                     preTexto.isEmpty() ||
@@ -113,10 +109,8 @@ public class AgregarProductoActivity extends AppCompatActivity {
             }
 
             double pre = Double.parseDouble(preTexto);
-            // NUEVO: Se convierte la cadena de texto de stock a tipo entero
             int cantidad = Integer.parseInt(stockTexto);
 
-            // MODIFICADO: Se pasa 'cantidad' como parámetro al insertar el producto
             boolean insertado = dbHelper.insertarProducto(
                     nom,
                     des,

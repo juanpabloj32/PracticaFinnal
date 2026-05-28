@@ -62,17 +62,32 @@ public class ProductosActivity extends AppCompatActivity {
 
         // MENU
         bottomNavigation.setSelectedItemId(R.id.nav_productos);
+
+        // REEMPLAZADO: Listener actualizado con la nueva opción "Acerca de"
         bottomNavigation.setOnItemSelectedListener(item -> {
+
             if(item.getItemId() == R.id.nav_productos){
+
                 return true;
+
             } else if(item.getItemId() == R.id.nav_agregar){
+
                 startActivity(new Intent(this, AgregarProductoActivity.class));
                 return true;
+
+            } else if(item.getItemId() == R.id.nav_acerca){
+
+                // NUEVO: Redirección a la pantalla Acerca de
+                startActivity(new Intent(this, AcercaDeActivity.class));
+                return true;
+
             } else if(item.getItemId() == R.id.nav_logout){
+
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 return true;
             }
+
             return false;
         });
 
@@ -97,10 +112,7 @@ public class ProductosActivity extends AppCompatActivity {
     // CARGAR PRODUCTOS
     private void cargarProductos(){
         listaProductos.clear();
-        listaProductos.addAll(dbHelper.obtenerProductos()); // Asegúrate si tu DBHelper usa obtenerProductos() u obtainProductos()
-
-        // Nota peer-to-peer: En los códigos previos usamos dbHelper.obtenerProductos()
-        // Si te marca error aquí, cámbialo a: dbHelper.obtenerProductos()
+        listaProductos.addAll(dbHelper.obtenerProductos());
 
         listaFiltrada.clear();
         listaFiltrada.addAll(listaProductos);

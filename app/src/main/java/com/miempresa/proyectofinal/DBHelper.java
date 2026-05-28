@@ -13,13 +13,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "Tienda.db";
 
     public DBHelper(Context context) {
-        // CAMBIO: Versión de la base de datos actualizada a 3
+
         super(context, DBNAME, null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // CAMBIO: Se agregó la columna "stock INTEGER" a la tabla productos
+
         db.execSQL("CREATE TABLE productos(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "nombre TEXT," +
@@ -31,12 +31,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Al subir la versión a 3, eliminamos la tabla vieja para que se recree con la nueva estructura
+
         db.execSQL("DROP TABLE IF EXISTS productos");
         onCreate(db);
     }
 
-    // CAMBIO: Método adaptado con el parámetro int stock e inserción de este valor
+
     public boolean insertarProducto(String nombre, String descripcion, double precio, String imagen, int stock){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -61,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         while(cursor.moveToNext()){
 
-            // CAMBIO: Se lee la columna índice 5 (stock) y se añade al constructor de Producto
+
             Producto p = new Producto(
                     cursor.getInt(0),
                     cursor.getString(1),
@@ -78,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return lista;
     }
 
-    // CAMBIO: Método adaptado para recibir y actualizar también el parámetro 'stock'
+
     public boolean actualizarProducto(int id, String nombre, String descripcion, double precio, String imagen, int stock){
 
         SQLiteDatabase db = this.getWritableDatabase();

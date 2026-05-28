@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEF2F7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="22dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="25dp">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/t"
+                android:background="#FFFFFF"
+                android:padding="18dp"
+                android:elevation="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mi Tiendita"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:textColor="#0F172A"
+                android:fontFamily="sans-serif-black"
+                android:layout_marginTop="18dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sistema de Inventario y Productos"
+                android:textSize="15sp"
+                android:textColor="#64748B"
+                android:layout_marginTop="5dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="28dp"
+            android:elevation="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acerca de la Aplicación"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Esta aplicación fue desarrollada para administrar productos, inventario y stock de manera rápida, moderna y eficiente."
+                android:textSize="16sp"
+                android:textColor="#475569"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="18dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Permite agregar, editar, eliminar y visualizar productos con imágenes y control de existencias."
+                android:textSize="16sp"
+                android:textColor="#475569"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="14dp"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E2E8F0"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="28dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desarrolladores"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#2563EB"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="18dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Irvin Daniel Becerra Coronel"
+                    android:textSize="17sp"
+                    android:textColor="#0F172A"
+                    android:paddingBottom="12dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Carlos Daniel Coutiño Gonzalez"
+                    android:textSize="17sp"
+                    android:textColor="#0F172A"
+                    android:paddingBottom="12dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Juan Pablo Jimenez Solano"
+                    android:textSize="17sp"
+                    android:textColor="#0F172A"
+                    android:paddingBottom="12dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Fernando Martin Vazquez Remirez"
+                    android:textSize="17sp"
+                    android:textColor="#0F172A"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E2E8F0"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="25dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:tint="#2563EB"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Versión 1.0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#334155"
+                    android:layout_marginStart="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="© 2026 Mi Tiendita"
+            android:textSize="13sp"
+            android:textColor="#94A3B8"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

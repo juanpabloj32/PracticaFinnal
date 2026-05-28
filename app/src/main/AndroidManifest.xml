@@ -7,26 +7,25 @@
         android:label="Tiendita"
         android:roundIcon="@drawable/t"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".DetalleProductoActivity"/>
-        <activity android:name=".EditarProductoActivity"/>
-        <activity android:name=".AgregarProductoActivity"/>
-        <activity android:name=".ProductosActivity"/>
-        <activity android:name=".LoginActivity"/>
-
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".AcercaDeActivity"
+            android:exported="false" />
+        <activity android:name=".DetalleProductoActivity" />
+        <activity android:name=".EditarProductoActivity" />
+        <activity android:name=".AgregarProductoActivity" />
+        <activity android:name=".ProductosActivity" />
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
     </application>
 
 </manifest>

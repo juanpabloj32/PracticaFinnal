@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="#F1F5F9">
 
-    <!-- CONTENIDO -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,14 +17,11 @@
         android:paddingEnd="18dp"
         android:paddingTop="18dp">
 
-        <!-- HEADER -->
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp">
-
-            <!-- TITULOS -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -51,8 +47,6 @@
 
             </LinearLayout>
 
-            <!-- PERFIL -->
-
             <ImageView
                 android:id="@+id/iconoPerfil"
                 android:layout_width="58dp"
@@ -64,8 +58,6 @@
                 android:elevation="8dp"/>
 
         </RelativeLayout>
-
-        <!-- BUSCADOR -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,8 +89,6 @@
 
         </LinearLayout>
 
-        <!-- CONTADOR -->
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,8 +97,6 @@
             android:textColor="#334155"
             android:textSize="15sp"
             android:layout_marginBottom="12dp"/>
-
-        <!-- LISTA -->
 
         <ListView
             android:id="@+id/listView"
@@ -121,8 +109,6 @@
             android:scrollbars="none"/>
 
     </LinearLayout>
-
-    <!-- BOTTOM NAVIGATION -->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

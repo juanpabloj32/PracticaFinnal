@@ -18,8 +18,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class EditarProductoActivity extends AppCompatActivity {
-
-    // MODIFICADO: Se añade "stockEditar" a la declaración de variables
     EditText nombreEditar, descripcionEditar, precioEditar, stockEditar;
 
     Button actualizar, cambiarImagen;
@@ -43,7 +41,6 @@ public class EditarProductoActivity extends AppCompatActivity {
         nombreEditar = findViewById(R.id.nombreEditar);
         descripcionEditar = findViewById(R.id.descripcionEditar);
         precioEditar = findViewById(R.id.precioEditar);
-        // NUEVO: Se conecta el componente del diseño con la variable Java
         stockEditar = findViewById(R.id.stockEditar);
 
         actualizar = findViewById(R.id.actualizar);
@@ -71,8 +68,6 @@ public class EditarProductoActivity extends AppCompatActivity {
         );
 
         rutaImagen = getIntent().getStringExtra("imagen");
-
-        // NUEVO: Se carga el stock actual enviado desde el Intent
         stockEditar.setText(
                 String.valueOf(
                         getIntent().getIntExtra("stock", 0)
@@ -134,11 +129,9 @@ public class EditarProductoActivity extends AppCompatActivity {
             String preTexto =
                     precioEditar.getText().toString().trim();
 
-            // NUEVO: Se obtiene el texto del campo de stock
             String stockTexto =
                     stockEditar.getText().toString().trim();
 
-            // MODIFICADO: Se incluye stockTexto en la condición del IF
             if(nom.isEmpty() ||
                     des.isEmpty() ||
                     preTexto.isEmpty() ||
@@ -154,10 +147,7 @@ public class EditarProductoActivity extends AppCompatActivity {
             }
 
             double pre = Double.parseDouble(preTexto);
-            // NUEVO: Se convierte la cadena de texto de stock a tipo entero
             int stock = Integer.parseInt(stockTexto);
-
-            // MODIFICADO: Se pasa 'stock' como último parámetro para actualizar la BD
             boolean actualizado =
                     dbHelper.actualizarProducto(
                             id,
